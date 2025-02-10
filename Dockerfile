@@ -19,7 +19,7 @@ RUN python3 -m venv /app/venv
 RUN /app/venv/bin/pip install -r scrapers/requirements.txt
 
 # Install dependencies for both the root and backend
-RUN npm install --prefix frontend && npm install --prefix backend
+RUN npm install --prefix frontend --legacy-peer-deps && npm install --prefix backend
 
 # Build the frontend
 RUN npm run build --prefix frontend
