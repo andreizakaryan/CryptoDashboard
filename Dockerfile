@@ -16,7 +16,7 @@ COPY . .
 RUN python3 -m venv /app/venv
 
 # Activate the virtual environment and install dependencies
-RUN /app/venv/bin/pip install -r scripts/requirements.txt
+RUN /app/venv/bin/pip install -r scrapers/requirements.txt
 
 # Install dependencies for both the root and backend
 RUN npm install --prefix frontend && npm install --prefix backend
@@ -28,4 +28,4 @@ RUN npm run build --prefix frontend
 EXPOSE 80 5000 5001
 
 # Start both frontend, backend, and Python script
-CMD ["sh", "-c", ". /app/venv/bin/activate && python scripts/generate_data.py & npm start --prefix backend & npx serve -s frontend/build -l 80"]
+CMD ["sh", "-c", ". /app/venv/bin/activate && python scrapers/main.py & npm start --prefix backend & npx serve -s frontend/build -l 80"]
