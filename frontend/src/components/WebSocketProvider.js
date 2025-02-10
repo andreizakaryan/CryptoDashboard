@@ -31,7 +31,7 @@ export const WebSocketProvider = ({ instrument, children }) => {
         setNewBinanceOhlcvPoints([]);
 
         if (!ws.current) {
-            ws.current = new WebSocket("ws://localhost:5001");
+            ws.current = new WebSocket("ws://${window.location.hostname}:5001");
 
             ws.current.onopen = () => {
                 console.log("WebSocket Connected");
