@@ -65,7 +65,13 @@ async def store_data(data, instrument):
             time, instrument, open, high, low, close, volume
         )
         VALUES ($1, $2, $3, $4, $5, $6, $7)
-        ON CONFLICT (time, instrument) DO NOTHING;
+        ON CONFLICT (time, instrument)
+        DO UPDATE SET
+            open = EXCLUDED.open,
+            high = EXCLUDED.high,
+            low = EXCLUDED.low,
+            close = EXCLUDED.close,
+            volume = EXCLUDED.volume;
         """
 
         records = []

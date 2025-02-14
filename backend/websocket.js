@@ -24,6 +24,8 @@ async function fetchNewData(ws, instrument) {
         for (const key in queries) {
             const params = (key == 'fear_greed') ? [ws.lastTimestamps[key]] : [instrument, ws.lastTimestamps[key]]
             const result = await pool.query(queries[key], params);
+            if (key == 'price')
+                result.rows.pop()
             newData[key] = result.rows;
 
             if (result.rows.length > 0) {

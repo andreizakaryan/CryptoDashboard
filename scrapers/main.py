@@ -13,7 +13,7 @@ async def main():
         scheduler.add_job(laevitas.fetch_data, "interval", minutes=1, args=[instrument], max_instances=1)
         scheduler.add_job(amberdata.fetch_data, "interval", minutes=1, args=[instrument], max_instances=1)
         scheduler.add_job(deribit.fetch_data, "interval", minutes=1, args=[instrument], max_instances=1)
-        scheduler.add_job(binance.fetch_data, "interval", minutes=1, args=[instrument], max_instances=1)
+        scheduler.add_job(binance.fetch_data, "interval", seconds=30, args=[instrument], max_instances=1)
         scheduler.add_job(laevitas_funding.fetch_data, "interval", minutes=1, args=[instrument], max_instances=1)
 
     scheduler.add_job(alternative.fetch_data, "interval", minutes=1, max_instances=1)
