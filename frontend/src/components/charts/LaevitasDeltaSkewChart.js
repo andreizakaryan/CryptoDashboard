@@ -99,7 +99,19 @@ const LaevitasDeltaSkewChart = ({ instrument }) => {
             tooltip.style.top = `${top}px`;
         });
 
+        const resizeObserver = new ResizeObserver(() => {
+            if (chartRef.current && chartContainerRef.current) {
+                chartRef.current.resize(
+                    chartContainerRef.current.clientWidth,
+                    chartContainerRef.current.clientHeight
+                );
+            }
+        });
+    
+        resizeObserver.observe(chartContainerRef.current);
+
         return () => {
+            resizeObserver.disconnect();
             chart.remove();
             tooltip.remove();
             chartRef.current = null;

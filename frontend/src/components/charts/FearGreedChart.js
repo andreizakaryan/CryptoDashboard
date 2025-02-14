@@ -52,7 +52,19 @@ const FearGreedChart = () => {
             }),
         });
 
+        const resizeObserver = new ResizeObserver(() => {
+            if (chartRef.current && chartContainerRef.current) {
+                chartRef.current.resize(
+                    chartContainerRef.current.clientWidth,
+                    chartContainerRef.current.clientHeight
+                );
+            }
+        });
+    
+        resizeObserver.observe(chartContainerRef.current);
+
         return () => {
+            resizeObserver.disconnect();
             chart.remove();
             chartRef.current = null;
         };

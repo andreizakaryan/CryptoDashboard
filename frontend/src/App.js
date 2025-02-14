@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import InstrumentSelector from "./components/InstrumentSelector";
 import TradingDashboard from "./components/TradingDashboard";
+import { ConfigProvider, theme } from 'antd';
 
 const App = () => {
   const [selectedInstrument, setSelectedInstrument] = useState("btc");
 
   return (
-    <div>
-      <InstrumentSelector selectedInstrument={selectedInstrument} setSelectedInstrument={setSelectedInstrument} />
-      <TradingDashboard instrument={selectedInstrument} />
-    </div>
+    <ConfigProvider 
+      theme={{
+        algorithm: theme.darkAlgorithm,
+      }}
+    >
+      <div>
+        <TradingDashboard instrument={selectedInstrument} />
+      </div>
+    </ConfigProvider>
   );
 };
 

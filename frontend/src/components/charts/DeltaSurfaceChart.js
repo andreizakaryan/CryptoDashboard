@@ -111,7 +111,19 @@ const DeltaSurfaceChart = ({ instrument }) =>  {
         });
 
 
+        const resizeObserver = new ResizeObserver(() => {
+            if (chartRef.current && chartContainerRef.current) {
+                chartRef.current.resize(
+                    chartContainerRef.current.clientWidth,
+                    chartContainerRef.current.clientHeight
+                );
+            }
+        });
+    
+        resizeObserver.observe(chartContainerRef.current);
+
         return () => {
+            resizeObserver.disconnect();
             chart.remove();
             tooltip.remove();
             chartRef.current = null;
@@ -176,11 +188,11 @@ const DeltaSurfaceChart = ({ instrument }) =>  {
                 value={selectedType}
                 onChange={setSelectedType}
                 style={{
-                position: "absolute",
-                top: "10px",
-                left: "10px",
-                zIndex: 1000,
-                width: 100,
+                    position: "absolute",
+                    top: "10px",
+                    left: "10px",
+                    zIndex: 1000,
+                    width: 100,
                 }}
             >
                 <Option value="ratio">Ratio</Option>
@@ -191,11 +203,11 @@ const DeltaSurfaceChart = ({ instrument }) =>  {
                 value={selectedDelta}
                 onChange={setSelectedDelta}
                 style={{
-                position: "absolute",
-                top: "10px",
-                left: "120px",
-                zIndex: 1000,
-                width: 100,
+                    position: "absolute",
+                    top: "10px",
+                    left: "120px",
+                    zIndex: 1000,
+                    width: 70,
                 }}
             >
                 <Option value="05">5</Option>
